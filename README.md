@@ -10,7 +10,7 @@
 
 * 操作界面
 
-![generate01](/Users/jiangyanlong/Desktop/generate01.png)
+  ![generate01](/Users/jiangyanlong/Desktop/generate01.png)
 
 * 生成后界面
 

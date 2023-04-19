@@ -1,0 +1,14 @@
+<svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+    <circle stroke="#2EAEB8" stroke-width="22" fill-opacity="1"
+            cx="100" cy="100" r="45"/>
+    <rect stroke="#2EAEB8" stroke-width="22" fill="#70D5DB" fill-opacity="1" stroke-dasharray="0" stroke-dashoffset="0" stroke-linecap="butt" stroke-linejoin="round" x="200" y="200" width="200" height="200"></rect>
+    <polyline fill="none" points="550,412 600,700 50,400 80,750"
+              stroke-opacity="1"
+              stroke="#2EAEB8"
+              stroke-width="22"
+              stroke-linecap="butt"
+              stroke-linejoin="round"
+              stroke-dasharray="0"
+              stroke-dashoffset="0"
+    />
+</svg>

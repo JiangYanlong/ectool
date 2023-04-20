@@ -1,4 +1,4 @@
-package com.longer.ectool.createrestful;
+package com.longer.ectool.base.util;
 
 /**
  * Constants.java
@@ -15,16 +15,12 @@ public class Constants {
     public static final String CMD_TEMPLATE = "cmd.ftl";
     public static final String SERVICE_TEMPLATE = "service.ftl";
     public static final String SERVICEIMPL_TEMPLATE = "serviceimpl.ftl";
-    public static final String GENERATOR_PATH = "generatecodetemp";
     public static final String ACTION_SUFFIX = "Action.java";
     public static final String BIZ_SUFFIX = "Bizz.java";
     public static final String SERVICE_SUFFIX = "Service.java";
     public static final String SERVICEIMPL_SUFFIX = "ServiceImpl.java";
     public static final String CMD_SUFFIX = "Cmd.java";
-    public static final String ZIP_SUFFIX = ".zip";
-    public static final String CLASSBEAN = "classbean/com";
     public static final String DOT = ".";
-    public static final String ECOLOGY = "ecology";
     public static final String API = "api";
     public static final String ENGINE = "engine";
     public static final String WEB = "web";

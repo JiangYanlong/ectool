@@ -1,18 +1,18 @@
-package com.longer.ectool;
+package com.longer.ectool.createrestful;
 
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.longer.ectool.createrestful.ViewDialog;
+import com.longer.ectool.createrestful.dialog.ViewDialog;
 
 /**
- * EcTool.java
+ * CreateRestful.java
  *
  * @author jiangyanlong
  * @version 1.0
  * @Date 2023/4/18 15:07
  * @Description
  */
-public class EcTool extends AnAction {
+public class CreateRestful extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent e) {

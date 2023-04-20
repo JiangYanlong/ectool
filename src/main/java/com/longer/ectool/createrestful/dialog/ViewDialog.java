@@ -1,11 +1,13 @@
-package com.longer.ectool.createrestful;
+package com.longer.ectool.createrestful.dialog;
 
-import com.intellij.notification.*;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.DialogWrapper;
+import com.intellij.openapi.ui.Messages;
 import com.intellij.openapi.ui.VerticalFlowLayout;
 import com.intellij.ui.components.JBScrollPane;
 import com.intellij.util.ui.JBUI;
+import com.longer.ectool.base.service.OperationService;
+import com.longer.ectool.base.service.impl.CreaterestfulOperationServiceImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -29,17 +31,17 @@ import java.util.stream.Stream;
  */
 public class ViewDialog extends DialogWrapper {
 
-    private NotificationGroup toolWindow;
+    private final Project project;
 
-    private Project project;
+    private OperationService operationService = new CreaterestfulOperationServiceImpl();
 
     // 初始化默认字段
-    private final List<DialectRow> list = new ArrayList<>();
+    private final List<DialectRow> showDialectRowList = new ArrayList<>();
 
     // 构造方法
-    public ViewDialog(@Nullable Project project) {
-        super(project);
-        this.project = project;
+    public ViewDialog(@Nullable Project e) {
+        super(e);
+        this.project = e;
         this.initDefaultFields();
         this.init();
     }
@@ -53,7 +55,7 @@ public class ViewDialog extends DialogWrapper {
         gridBagConstraints.anchor = 15;
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
-        JScrollPane scrollPane = this.buildMainPane();
+        JScrollPane scrollPane = this.building();
         layout.setConstraints(scrollPane, gridBagConstraints);
         BorderLayout borderLayout = new BorderLayout();
         JPanel contentPane = new JPanel(borderLayout);
@@ -63,10 +65,10 @@ public class ViewDialog extends DialogWrapper {
         return contentPane;
     }
 
-    private JScrollPane buildMainPane() {
+    private JScrollPane building() {
         VerticalFlowLayout centerLayout = new VerticalFlowLayout();
         JPanel dialectsPanel = new JPanel(centerLayout);
-        list.forEach(dialectsPanel::add);
+        showDialectRowList.forEach(dialectsPanel::add);
         return new JBScrollPane(dialectsPanel);
     }
 
@@ -79,6 +81,7 @@ public class ViewDialog extends DialogWrapper {
     private DialogWrapper.DialogWrapperAction createAnAction(String name, final Consumer<ActionEvent> consumer) {
         return new DialogWrapper.DialogWrapperAction(name) {
             private static final long serialVersionUID = -62877809570565207L;
+
             protected void doAction(ActionEvent e) {
                 consumer.accept(e);
             }
@@ -91,24 +94,20 @@ public class ViewDialog extends DialogWrapper {
     }
 
     private void ok(ActionEvent e) {
-        Map<String,String> map = new HashMap<>();
-        list.forEach(dialectRow -> {
-            if(dialectRow.labelValue.getText().equals("")) {
-                Notification toolWindowNotification = toolWindow.createNotification(dialectRow.labelName.getText().replace(":","") + " 不能为空", NotificationType.ERROR);
-                Notifications.Bus.notify(toolWindowNotification);
-                throw new RuntimeException(dialectRow.labelName.getText().replace(":","") + " 不能为空");
+        Map<String, String> map = new HashMap<>();
+        showDialectRowList.forEach(dialectRow -> {
+            if (dialectRow.labelValue.getText().equals("")) {
+                Messages.showMessageDialog(this.project, dialectRow.labelName.getText().replace(":", "") + " 不能为空", "", Messages.getErrorIcon());
+                throw new RuntimeException(dialectRow.labelName.getText().replace(":", "") + " 不能为空");
             }
-            map.put(dialectRow.labelValue.getName(),dialectRow.labelValue.getText());
+            map.put(dialectRow.labelValue.getName(), dialectRow.labelValue.getText());
         });
 
-        Opration opration = new Opration();
         try {
-            opration.create(this.project,map);
-            Notification toolWindowNotification = toolWindow.createNotification("生成成功!", NotificationType.INFORMATION);
-            Notifications.Bus.notify(toolWindowNotification);
+            operationService.operate(this.project, map);
+            Messages.showMessageDialog(this.project, "Success!!!", "", Messages.getInformationIcon());
         } catch (Exception ex) {
-            Notification toolWindowNotification = toolWindow.createNotification("异常:" + ex.getMessage(), NotificationType.ERROR);
-            Notifications.Bus.notify(toolWindowNotification);
+            Messages.showMessageDialog(this.project, "Fail:" + ex.getMessage(), "", Messages.getErrorIcon());
             throw new RuntimeException("异常:" + ex.getMessage());
         } finally {
             this.dispose();
@@ -116,15 +115,12 @@ public class ViewDialog extends DialogWrapper {
     }
 
     public void initDefaultFields() {
-        // 获取通知组管理器
-        NotificationGroupManager manager = NotificationGroupManager.getInstance();
-        this.toolWindow = manager.getNotificationGroup("ec-tool.notification.tool.window");
         Stream<DialectRow> stream = Stream.of(new DialectRow("文件路径", "srcFilePath", "文件生成到的目录，如：/src/main/java")
                 , new DialectRow("接口名称", "classPreName", "接口名称：如LongerAction,则只需要输入Longer")
                 , new DialectRow("文件路径", "filePath", "文件路径：如存放src/com/api/longer/test,则只需要输入longer.test")
                 , new DialectRow("一级路径", "apiFirstPath", "一级路径：如访问接口为/api/longer/create,则只需要输入longer")
                 , new DialectRow("剩余路径", "apiRestPath", "剩余路径：如访问接口为/api/longer/create,则只需要输入create,如果要生成多个路径如/api/longer/create /api/longer/update 需要填写/create;/update"));
-        stream.forEach(list::add);
+        stream.forEach(showDialectRowList::add);
     }
 
     static class DialectRow extends JPanel {

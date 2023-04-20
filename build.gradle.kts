@@ -29,8 +29,12 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("221")
+        sinceBuild.set("201")
         untilBuild.set("231.*")
+        changeNotes.set("Add change notes here.<br> " +
+                "- <b>Breaking Change</b>: Change Plugin location.<br> " +
+                "- <b>Breaking Change</b>: Change suitable idea version. <br> " +
+                "- <b>Fixed</b>: Fixed bugs.")
     }
 
     signPlugin {

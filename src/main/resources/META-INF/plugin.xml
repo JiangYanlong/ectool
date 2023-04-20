@@ -26,16 +26,12 @@
     </extensions>
 
     <actions>
-        <action id="EcTool" class="com.longer.ectool.EcTool" text="Ecto"
-                description="Ecto,用于生成ecology restful接口开发的工具，解决重复工作，解放双手!!">
+        <group id="EcToolGroup" text="Ecto" popup="true">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
-            <keyboard-shortcut first-keystroke="ctrl shift I" keymap="$default" />
-        </action>
+            <action class="com.longer.ectool.createrestful.CreateRestful" text="Create Restful">
+                <keyboard-shortcut first-keystroke="ctrl shift I" keymap="$default"/>
+            </action>
+        </group>
     </actions>
 
-    <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
-        <!-- displayType只有这四种类型, id 在一个插件内不能重复,isLogByDefault表示是否在 Event Log 中记录 -->
-        <notificationGroup displayType="TOOL_WINDOW" id="ec-tool.notification.tool.window"/>
-    </extensions>
 </idea-plugin>

@@ -1,18 +1,16 @@
-package com.longer.ectool.createrestful;
-
-import lombok.*;
+package com.longer.ectool.createrestful.bean;
 
 /**
- * BizzBean.java
+ * CmdBean.java
  *
  * @author jiangyanlong
  * @version 1.0
  * @Date 2023/4/19 14:04
  * @Description
  */
-public class BizzBean {
+public class CmdBean {
 
-    public BizzBean(String path, String random, String cmdname) {
+    public CmdBean(String path, String random, String cmdname) {
         this.path = path;
         this.random = random;
         this.cmdname = cmdname;

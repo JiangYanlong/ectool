@@ -31,6 +31,9 @@
             <action class="com.longer.ectool.createrestful.CreateRestful" text="Create Restful">
                 <keyboard-shortcut first-keystroke="ctrl shift I" keymap="$default"/>
             </action>
+            <action class="com.longer.ectool.flowintegration.FlowIntegration" text="FlowIntegration">
+                <keyboard-shortcut first-keystroke="ctrl shift J" keymap="$default"/>
+            </action>
         </group>
     </actions>
 

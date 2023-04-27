@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "com.longer"
-version = "1.0-SNAPSHOT"
+version = "1.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -31,10 +31,8 @@ tasks {
     patchPluginXml {
         sinceBuild.set("201")
         untilBuild.set("231.*")
-        changeNotes.set("Add change notes here.<br> " +
-                "- <b>Breaking Change</b>: Change Plugin location.<br> " +
-                "- <b>Breaking Change</b>: Change suitable idea version. <br> " +
-                "- <b>Fixed</b>: Fixed bugs.")
+        changeNotes.set("Change notes <br> " +
+                "1. Add generate FlowIntegration markdown.<br>")
     }
 
     signPlugin {
@@ -50,5 +48,4 @@ tasks {
 
 dependencies {
     implementation(fileTree(mapOf("dir" to "lib", "include" to listOf("*.jar"))))
-    implementation("org.projectlombok:lombok:1.18.22")
 }

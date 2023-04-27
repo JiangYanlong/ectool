@@ -1,4 +1,4 @@
-package com.longer.ectool.base.util;
+package com.longer.ectool.base.constants;
 
 /**
  * Constants.java
@@ -27,6 +27,7 @@ public class Constants {
     public static final String SERVICE = "service";
     public static final String SERVICEIMPL = "impl";
     public static final String CMD = "cmd";
-
     public static final String COM = "com";
+    public static final String MD_TEMPLATE = "调用Ec接口认证.ftl";
+    public static final String MD_SUFFIX = "调用Ec接口认证.md";
 }

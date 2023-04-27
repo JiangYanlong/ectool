@@ -1,7 +1,7 @@
 package com.longer.ectool.base.service.impl;
 
 import com.intellij.openapi.project.Project;
-import com.longer.ectool.base.util.Constants;
+import com.longer.ectool.base.constants.Constants;
 import com.longer.ectool.base.util.CreaterestfulUtil;
 import com.longer.ectool.createrestful.bean.CmdBean;
 import com.longer.ectool.base.service.OperationService;

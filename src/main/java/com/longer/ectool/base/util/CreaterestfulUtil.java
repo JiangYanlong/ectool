@@ -1,5 +1,6 @@
 package com.longer.ectool.base.util;
 
+import com.longer.ectool.base.constants.Constants;
 import com.longer.ectool.createrestful.bean.CmdBean;
 import freemarker.cache.ClassTemplateLoader;
 import freemarker.template.Configuration;
@@ -17,7 +18,7 @@ import java.util.*;
  * @Date 2023/4/20 09:56
  * @Description
  */
-public class CreaterestfulUtil {
+public class CreaterestfulUtil extends AbstactHelpUtil {
 
     /**
      * 创建API入口文件
@@ -121,64 +122,5 @@ public class CreaterestfulUtil {
         data.put("package", "com.engine." + path + "." + Constants.CMD);
         data.put("className", className);
         return data;
-    }
-
-    /**
-     * 随机生成长度为5的字符串
-     * @return 随机字符串
-     */
-    public static String getRandomString() {
-        String str = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        Random random = new Random();
-        StringBuffer sb = new StringBuffer();
-        for (int i = 0; i < 5; i++) {
-            int number = random.nextInt(62);
-            sb.append(str.charAt(number));
-        }
-        return sb.toString();
-    }
-
-    /**
-     * 字符串首字母转大写
-     * @param s 字符串
-     */
-    public static String toUpperCaseFirstOne(String s) {
-        if (Character.isUpperCase(s.charAt(0)))
-            return s;
-        else
-            return (new StringBuilder()).append(Character.toUpperCase(s.charAt(0))).append(s.substring(1)).toString();
-    }
-
-    /**
-     * 生成文件,返回文件路径
-     * @param filePath 生成文件路径
-     * @param data 模版填充数据
-     * @param ftlName 模版名称
-     * @return 文件路径
-     * @throws Exception 异常
-     */
-    public static String createFileByTemplate(String filePath, Map<String, Object> data, String ftlName) throws Exception {
-        Configuration cfg = new Configuration();
-        cfg.setTemplateLoader(new ClassTemplateLoader(CreaterestfulUtil.class,  "/config"));
-        // 获取模板对象
-        Template template = cfg.getTemplate(ftlName);
-        // 渲染模板并输出结果
-        File file = new File(filePath);
-        FileWriter writer = new FileWriter(file);
-        template.process(data, writer);
-        writer.close();
-        return file.getAbsolutePath();
-    }
-
-    /**
-     * 文件夹不存在则创建
-     * @param tempPath 文件夹路径
-     */
-    public static void createDirecrory(String tempPath) {
-        // 如果目录不存在，则创建
-        File tempFile = new File(tempPath);
-        if (!tempFile.exists()) {
-            tempFile.mkdirs();
-        }
     }
 }
